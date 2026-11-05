@@ -3,15 +3,32 @@
 > **공개용 사본 안내**
 > 이 저장소는 팀 저장소(`LGaimers-9th/lgaimers`, 비공개)의 대회 종료 시점 `main`(2026-08-22, `7d37d2d`)을 포트폴리오용으로 옮긴 것입니다. `main`의 코드·문서·분석 결과는 모두 sooyahh가 작성했으며, 팀원의 실험 브랜치는 넣지 않았습니다.
 >
+> - **참가 형태: 개인 참가.** 대회 중 잠시 팀을 결성해 이 저장소를 팀 협업용으로 구성했으나, 팀을 해체하고 개인 참가로 돌아갔습니다. 아래 본문의 '팀 단위 협업' 규칙은 그때 만든 것으로, 이후에도 혼자 같은 규칙(브랜치 → PR → 병합, 실험 레지스트리)을 지키며 작업했습니다.
+>
 > - 대회 데이터 재배포 금지에 따라 원본 데이터(`data/raw/`), 행 단위 예측, 모델 파일은 넣지 않았습니다. `outputs/`와 `reports/`의 결과는 모두 집계 통계입니다.
 > - 커밋 이력은 옮기지 않았고, 문서 안의 로컬 절대 경로는 저장소 기준 상대 경로로 바꿨습니다.
 > - 아래 본문은 대회 당시 안내서를 그대로 둔 것입니다. 실행하려면 DACON에서 받은 데이터를 `data/raw/`에 직접 넣어야 합니다.
 
 DACON LG Aimers 9기 Phase 2 — 투구 단위 이진 확률 예측 (`control_success`).
 
-공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline~제출용 실험(EXP-000~006)을 재현한다.
+공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline부터 제출용 실험(EXP-000–006)까지 재현한다.
 
 이 저장소는 개인 실험 파이프라인을 유지한 채 팀 단위로 실험·리뷰·병합하기 위한 공용 코드베이스다. 협업 규칙의 상세는 `CONTRIBUTING.md`를 따른다.
+
+## 결과 요약 — Public LB와 원인 분리
+
+평가 시즌(2025)에는 학습 때 보지 못한 선수가 많다는 가설로, 선수 ID(`pitcher_id`, `batter_id`)를 뺀 모델과 **ID만 다르고 나머지는 같은 통제 제출**(LB-PROBE)을 따로 냈다. 상세: [`reports/lb_anchor_analysis_001.md`](reports/lb_anchor_analysis_001.md)
+
+| 제출 | 바꾼 것 | 학습 시즌 | 로컬 2024 raw BSS | Public LB |
+|---|---|---|---:|---:|
+| `EXP-004` | 기준 (ID 포함, 44 feature) | 2019–2023 | 578.18 | 406.95 |
+| `LB-PROBE` | 선수 ID만 제거 (42 feature) | 2019–2023 | 739.97 | 676.21 |
+| **`EXP-005`** (최종) | ID 제거 + 2024 시즌 추가 학습 | 2019–2024 | 739.97 | **877.60** |
+
+- 전체 향상 +470.65 = **선수 ID 제거 +269.26 (57.2%)** + 2024 시즌 추가 +201.39 (42.8%)
+- ID 제거 효과는 로컬 2024 holdout에서 +161.79, Public LB에서 +269.26으로 **1.66배** 커졌다 (이 변화 1건의 전이율이며 일반화하지 않음).
+- 이 대회는 Public LB = Private LB라서, 하이퍼파라미터를 LB 점수로 고르지 않고 해석 규칙을 제출 전에 정했다.
+- 결과는 수료 기준(549.51) 통과 수준이며, Phase 3 진출 컷(상위 100명)에는 미달했다.
 
 ## Competition / Problem
 
@@ -62,7 +79,7 @@ Score = max(0, 100000 * (1 - Brier / (r * (1 - r))))
 | 위치 | 내용 |
 |---|---|
 | `outputs/experiments.csv` | 실험 레지스트리 (공식 로그) |
-| `docs/GPT_HANDOFF.md` | EXP-000~006 수치·결정 상태 |
+| `docs/GPT_HANDOFF.md` | EXP-000–006 수치·결정 상태 |
 | `reports/gpt_audit/` | 외부 분석용 요약·핸드오프 |
 | `reports/validation_policy.md` | CV lock |
 
@@ -215,7 +232,7 @@ python scripts/verify_gpt_audit_oof_joins.py
 ## 문서 인덱스
 
 - `CONTRIBUTING.md` — 브랜치, 실험, PR 규칙
-- `docs/GPT_HANDOFF.md` — EXP-000~006 수치·결정 상태
+- `docs/GPT_HANDOFF.md` — EXP-000–006 수치·결정 상태
 - `reports/validation_policy.md` — CV lock
 - `reports/feature_safety_audit.md` — feature 안전성
 - `reports/gpt_audit/README.md` — audit 패키지 안내
