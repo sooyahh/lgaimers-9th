@@ -11,7 +11,7 @@
 
 DACON LG Aimers 9기 Phase 2 — 투구 단위 이진 확률 예측 (`control_success`).
 
-공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline부터 제출용 실험까지(EXP-000–006)을 재현한다.
+공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline부터 제출용 실험(EXP-000–006)까지 재현한다.
 
 이 저장소는 개인 실험 파이프라인을 유지한 채 팀 단위로 실험·리뷰·병합하기 위한 공용 코드베이스다. 협업 규칙의 상세는 `CONTRIBUTING.md`를 따른다.
 
