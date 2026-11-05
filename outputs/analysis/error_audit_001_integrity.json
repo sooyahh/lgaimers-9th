@@ -1,0 +1,81 @@
+{
+  "experiment_id": "EXP-004",
+  "oof_path": "outputs/predictions/EXP-004/oof_holdout_predictions.csv",
+  "oof_n_rows": 746504,
+  "oof_columns": [
+    "row_id",
+    "season",
+    "control_success",
+    "prediction",
+    "fold_id",
+    "split_type"
+  ],
+  "row_id_unique": true,
+  "n_duplicate_row_id": 0,
+  "folds_present": [
+    "primary_2024",
+    "secondary_2022",
+    "secondary_2023"
+  ],
+  "seasons_present": [
+    2022,
+    2023,
+    2024
+  ],
+  "prediction_nan": 0,
+  "prediction_inf": 0,
+  "prediction_min": 0.3283647120351847,
+  "prediction_max": 0.7997341571413175,
+  "prediction_outside_01": 0,
+  "target_nan": 0,
+  "comparable_cv": true,
+  "baseline_choice_reason": "EXP-004 is the latest CatBoost with is_comparable_cv=true, expanding 3-fold OOF covering 2022/2023/2024, and passed gpt_audit join verification. EXP-006 is hold (not adopt); its 2024 file is the Optuna tune holdout; EXP-005 has no row-level OOF.",
+  "n_before_join": 746504,
+  "n_after_join": 746504,
+  "unmatched_pitcher_id_na": 0,
+  "duplicate_row_increase": 0,
+  "target_alignment_vs_train": true,
+  "train_map_na": 0,
+  "prior_join_verification_exp004": {
+    "enriched_file": "EXP-004_oof_holdout_enriched.csv",
+    "source_file": "outputs/predictions/EXP-004/oof_holdout_predictions.csv",
+    "n_rows_before_join": 746504,
+    "n_rows_after_join": 746504,
+    "unmatched_rows_pitcher_id_na": 0,
+    "duplicate_row_increase_vs_source": false,
+    "n_duplicate_row_id_in_enriched": 0,
+    "train_row_id_unique": true,
+    "target_alignment_vs_source_same_order": true,
+    "target_alignment_method": "same_row_order_elementwise",
+    "target_alignment_vs_train_control_success": true,
+    "train_map_na": 0,
+    "expect_row_id_unique": false,
+    "row_id_unique_ok": true
+  },
+  "fold_score_crosscheck": {
+    "primary_2024": {
+      "n": 253507,
+      "raw_brier_skill_score": 578.1844155969828,
+      "official_brier_skill_score": 578.1844155969828,
+      "brier_score": 0.24836258203719846,
+      "logged_raw_bss": 578.1844155969828,
+      "matches_logged": true
+    },
+    "secondary_2022": {
+      "n": 247472,
+      "raw_brier_skill_score": 2259.3983277146012,
+      "official_brier_skill_score": 2259.3983277146012,
+      "brier_score": 0.24353400955510912,
+      "logged_raw_bss": 2259.3983277146012,
+      "matches_logged": true
+    },
+    "secondary_2023": {
+      "n": 245525,
+      "raw_brier_skill_score": -1366.4810668740479,
+      "official_brier_skill_score": 0.0,
+      "brier_score": 0.25341620081330546,
+      "logged_raw_bss": -1366.4810668740479,
+      "matches_logged": true
+    }
+  }
+}

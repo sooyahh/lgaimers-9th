@@ -1,0 +1,50 @@
+column,present_in_train,present_in_test_sample,dtype_per_data_integrity,role_note
+row_id,yes,yes,str,submission key / join key
+season,yes,yes,int64,temporal split axis
+game_month,yes,yes,int64,context
+game_dayofweek,yes,yes,int64,context
+inning,yes,yes,int64,context
+top_bottom,yes,yes,str,categorical context
+game_type,yes,yes,str,categorical context
+balls_before,yes,yes,int64,count
+strikes_before,yes,yes,int64,count
+outs_before,yes,yes,int64,count
+run_top_before,yes,yes,int64,score state
+run_bot_before,yes,yes,int64,score state
+run_total_before,yes,yes,int64,score state
+score_diff_home,yes,yes,int64,score state
+score_diff_pitcher_team,yes,yes,int64,score state
+runner_on_1b,yes,yes,int64,base state
+runner_on_2b,yes,yes,int64,base state
+runner_on_3b,yes,yes,int64,base state
+num_runners_on,yes,yes,int64,base state
+base_state,yes,yes,str,categorical
+home_win_expectancy,yes,yes,float64,excluded from models (leakage review)
+away_win_expectancy,yes,yes,float64,excluded from models (leakage review)
+li,yes,yes,float64,excluded from models (leakage review)
+pitcher_id,yes,yes,int64,entity id (dropped in EXP-005/006 L)
+batter_id,yes,yes,int64,entity id (dropped in EXP-005/006 L)
+pitcher_hand,yes,yes,int64,categorical-like
+batter_hand,yes,yes,int64,categorical-like
+pitcher_team_id,yes,yes,int64,team id
+batter_team_id,yes,yes,int64,team id
+asof_pitcher_n,yes,yes,int64,official asof
+asof_pitcher_success_rate,yes,yes,float64,official asof
+asof_pitcher_reverse_rate,yes,yes,float64,official asof
+asof_pitcher_middle_rate,yes,yes,float64,official asof
+asof_pitcher_ball_rate,yes,yes,float64,official asof
+asof_pitcher_strike_rate,yes,yes,float64,official asof
+asof_pitcher_prev1_game_success_rate,yes,yes,float64,official asof
+asof_pitcher_prev3_game_success_rate,yes,yes,float64,official asof
+asof_pitcher_prev5_game_success_rate,yes,yes,float64,official asof
+asof_pitcher_prev1_game_middle_rate,yes,yes,float64,official asof
+asof_pitcher_prev3_game_middle_rate,yes,yes,float64,official asof
+asof_pitcher_prev5_game_middle_rate,yes,yes,float64,official asof
+asof_batter_n,yes,yes,int64,official asof
+asof_batter_success_rate,yes,yes,float64,official asof
+asof_batter_middle_rate,yes,yes,float64,official asof
+asof_pitcher_pitchmix_n,yes,yes,int64,official asof
+asof_pitcher_fastball_rate,yes,yes,float64,official asof
+asof_pitcher_breaking_rate,yes,yes,float64,official asof
+asof_pitcher_offspeed_rate,yes,yes,float64,official asof
+control_success,yes,no,int64,target

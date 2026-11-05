@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-08-07T04:45:05",
+  "hypothesis": "Predicting a future season (e.g. 2025/test) may share the same failure mode as secondary_2023 (train past seasons → valid next season).",
+  "common": {
+    "model": "catboost",
+    "params": {
+      "iterations": 300,
+      "learning_rate": 0.05,
+      "depth": 6,
+      "loss_function": "Logloss"
+    },
+    "seed": 42,
+    "train_seasons": [
+      2019,
+      2020,
+      2021,
+      2022
+    ],
+    "valid_seasons": [
+      2023
+    ]
+  },
+  "references": {
+    "EXP-003_secondary_2023_raw_bss": -1319.882959849372,
+    "EXP-004_fold_metrics_secondary_2023_raw_bss": -1366.481066874048
+  },
+  "runs": {
+    "exp004_style_season_plus_weights": {
+      "label": "EXP004_style_secondary_2023",
+      "train_seasons": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "valid_seasons": [
+        2023
+      ],
+      "n_features": 44,
+      "has_season": true,
+      "sample_weight_by_season": {
+        "2019": 1.0,
+        "2020": 1.2,
+        "2021": 1.4,
+        "2022": 1.6
+      },
+      "n_train": 976060,
+      "n_valid": 245525,
+      "train_target_mean": 0.5395365039034485,
+      "valid_target_rate": 0.49995723449750534,
+      "brier_score": 0.25341620081330546,
+      "raw_brier_skill_score": -1366.4810668740479,
+      "official_brier_skill_score": 0.0,
+      "prediction_mean": 0.520392153538138,
+      "prediction_std": 0.06593598138288265,
+      "elapsed_seconds": 148.28309639985673
+    },
+    "season_kept_unweighted": {
+      "label": "season_kept_unweighted_2023",
+      "train_seasons": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "valid_seasons": [
+        2023
+      ],
+      "n_features": 44,
+      "has_season": true,
+      "sample_weight_by_season": null,
+      "n_train": 976060,
+      "n_valid": 245525,
+      "train_target_mean": 0.5395365039034485,
+      "valid_target_rate": 0.49995723449750534,
+      "brier_score": 0.25329970554659603,
+      "raw_brier_skill_score": -1319.8829598493721,
+      "official_brier_skill_score": 0.0,
+      "prediction_mean": 0.5217328616629427,
+      "prediction_std": 0.06518746854378588,
+      "elapsed_seconds": 148.3350993997883
+    },
+    "season_dropped_D_unweighted": {
+      "label": "season_dropped_D_unweighted_2023",
+      "train_seasons": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "valid_seasons": [
+        2023
+      ],
+      "n_features": 43,
+      "has_season": false,
+      "sample_weight_by_season": null,
+      "n_train": 976060,
+      "n_valid": 245525,
+      "train_target_mean": 0.5395365039034485,
+      "valid_target_rate": 0.49995723449750534,
+      "brier_score": 0.25261165710774963,
+      "raw_brier_skill_score": -1044.663582297445,
+      "official_brier_skill_score": 0.0,
+      "prediction_mean": 0.5192748652024808,
+      "prediction_std": 0.06168770976403451,
+      "elapsed_seconds": 145.85088429995812
+    },
+    "season_dropped_plus_weights": {
+      "label": "season_dropped_weighted_2023",
+      "train_seasons": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "valid_seasons": [
+        2023
+      ],
+      "n_features": 43,
+      "has_season": false,
+      "sample_weight_by_season": {
+        "2019": 1.0,
+        "2020": 1.2,
+        "2021": 1.4,
+        "2022": 1.6
+      },
+      "n_train": 976060,
+      "n_valid": 245525,
+      "train_target_mean": 0.5395365039034485,
+      "valid_target_rate": 0.49995723449750534,
+      "brier_score": 0.2528183488340211,
+      "raw_brier_skill_score": -1127.3402734108595,
+      "official_brier_skill_score": 0.0,
+      "prediction_mean": 0.5191235644321673,
+      "prediction_std": 0.06264678142659925,
+      "elapsed_seconds": 152.58451659977436
+    }
+  }
+}

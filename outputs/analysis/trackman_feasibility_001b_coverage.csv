@@ -1,0 +1,17 @@
+valid_year,hist_years,level,keys,n_main,n_tm_hist,coverage,fallback_needed_rate,note,section,n_tm_groups,median_group_n,p10_group_n,p50_group_n,p90_group_n,share_groups_ge_min_n,main_rows_matched_any,main_rows_matched_ge_min_n,min_group_n,max_group_n
+2022,"2019,2020,2021",L1_hand_count,pitcher_hand+batter_hand+balls_before+strikes_before,247472.0,836115,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2022,"2019,2020,2021",L2_pitcher_hand_count,pitcher_hand+balls_before+strikes_before,247472.0,836115,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2022,"2019,2020,2021",L3_pitcher_hand,pitcher_hand,247472.0,836115,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2022,"2019,2020,2021",L0_count_only,balls_before+strikes_before,247472.0,836115,1.0,0.0,prior-season TM only,tm001_coverage,12.0,57283.0,22034.600000000002,57283.0,100157.8,1.0,247472.0,247472.0,11285.0,217726.0
+2023,"2019,2020,2021,2022",L1_hand_count,pitcher_hand+batter_hand+balls_before+strikes_before,245525.0,1143752,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2023,"2019,2020,2021,2022",L2_pitcher_hand_count,pitcher_hand+balls_before+strikes_before,245525.0,1143752,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2023,"2019,2020,2021,2022",L3_pitcher_hand,pitcher_hand,245525.0,1143752,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2023,"2019,2020,2021,2022",L0_count_only,balls_before+strikes_before,245525.0,1143752,1.0,0.0,prior-season TM only,tm001_coverage,14.0,65486.5,4562.200000000001,65486.5,134457.2,0.8571428571428571,245525.0,245525.0,1.0,298131.0
+2024,"2019,2020,2021,2022,2023",L1_hand_count,pitcher_hand+batter_hand+balls_before+strikes_before,253507.0,1458852,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2024,"2019,2020,2021,2022,2023",L2_pitcher_hand_count,pitcher_hand+balls_before+strikes_before,253507.0,1458852,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2024,"2019,2020,2021,2022,2023",L3_pitcher_hand,pitcher_hand,253507.0,1458852,,1.0,hand codes do not overlap; this level cannot be joined,tm001_coverage,,,,,,,,,,
+2024,"2019,2020,2021,2022,2023",L0_count_only,balls_before+strikes_before,253507.0,1458852,1.0,0.0,prior-season TM only,tm001_coverage,14.0,83389.0,5838.100000000001,83389.0,171365.80000000002,0.8571428571428571,253507.0,253507.0,1.0,379678.0
+2025,"2019,2020,2021,2022,2023,2024",L1_hand_count,pitcher_hand+batter_hand+balls_before+strikes_before,,1793078,,,2025 main-row coverage not available without full test labels/rows,tm001_coverage,,,,,,,,,,
+2025,"2019,2020,2021,2022,2023,2024",L2_pitcher_hand_count,pitcher_hand+balls_before+strikes_before,,1793078,,,2025 main-row coverage not available without full test labels/rows,tm001_coverage,,,,,,,,,,
+2025,"2019,2020,2021,2022,2023,2024",L3_pitcher_hand,pitcher_hand,,1793078,,,2025 main-row coverage not available without full test labels/rows,tm001_coverage,,,,,,,,,,
+2025,"2019,2020,2021,2022,2023,2024",L0_count_only,balls_before+strikes_before,,1793078,,,2025 main-row coverage not available without full test labels/rows,tm001_coverage,,,,,,,,,,

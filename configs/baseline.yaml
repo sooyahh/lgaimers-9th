@@ -1,0 +1,105 @@
+project:
+  name: lg_aimers_phase2_temporal_baselines
+  purpose: reproducible_time_axis_binary_probability_baselines
+  data_version: phase2_open_data_raw_copy
+  notes: "Validation policy provisionally locked: primary 2019-2023→2024; secondary expanding folds 2022/2023/2024. order_cols empty. WE/LI excluded until construction confirmed."
+  next_action: "EXP-001A logistic regression on provisionally safe features; compare to EXP-000 without adopt/reject decision."
+
+data:
+  train_path: data/raw/train.csv
+  test_path: data/raw/test.csv
+  sample_submission_path: data/raw/sample_submission.csv
+  target_col: control_success
+  id_col: row_id
+  submission_key_cols: [row_id]
+  season_col: season
+  time_col: null
+  order_cols: []
+  entity_id_col: pitcher_id
+
+task:
+  problem_type: binary_classification
+  metric:
+    name: brier_skill_score
+    direction: maximize
+    clip_at_zero: true
+    scale: 100000
+  metric_callable: null
+
+cv:
+  # Provisional locked policy (VAL-AUDIT-001)
+  strategy: season_holdout
+  primary:
+    train_seasons: [2019, 2020, 2021, 2022, 2023]
+    valid_seasons: [2024]
+  secondary_folds:
+    - train_seasons: [2019, 2020, 2021]
+      valid_seasons: [2022]
+    - train_seasons: [2019, 2020, 2021, 2022]
+      valid_seasons: [2023]
+    - train_seasons: [2019, 2020, 2021, 2022, 2023]
+      valid_seasons: [2024]
+  min_train_seasons: 2
+  validation_seasons: 1
+  holdout_seasons: 1
+  gap_seasons: 0
+
+models:
+  enabled:
+    - global_mean
+    - logistic_regression
+    - catboost
+    - lightgbm
+  missing_dependency: skip
+  params:
+    global_mean: {}
+    logistic_regression:
+      C: 1.0
+      solver: liblinear          # sparse-capable
+      max_iter: 1000
+    catboost:
+      iterations: 300
+      learning_rate: 0.05
+      depth: 6
+      loss_function: Logloss
+    lightgbm:
+      n_estimators: 300
+      learning_rate: 0.05
+      num_leaves: 31
+
+features:
+  # EXP-001A provisionally safe set (see reports/feature_safety_audit.md)
+  exclude_cols:
+    - row_id
+    - home_win_expectancy
+    - away_win_expectancy
+    - li
+  categorical_cols:
+    - top_bottom
+    - game_type
+    - base_state
+    - pitcher_id
+    - batter_id
+    - pitcher_hand
+    - batter_hand
+    - pitcher_team_id
+    - batter_team_id
+  # remaining non-excluded columns are numeric, including official asof_* features
+  parse_datetime: false
+  add_missing_indicators: true
+
+diagnostics:
+  calibration_bins: 10
+  min_group_rows: 30
+
+submission:
+  models: null
+
+runtime:
+  seed: 42
+
+output:
+  models_dir: outputs/models
+  predictions_dir: outputs/predictions
+  submissions_dir: outputs/submissions
+  experiments_path: outputs/experiments.csv

@@ -1,0 +1,196 @@
+{
+  "task": "D_task_c_multiseed",
+  "generated_at": "2026-08-07T16:57:18",
+  "setup": {
+    "model": "catboost",
+    "params": {
+      "iterations": 300,
+      "learning_rate": 0.05,
+      "depth": 6,
+      "loss_function": "Logloss"
+    },
+    "seeds": [
+      42,
+      1,
+      7,
+      123,
+      2024
+    ],
+    "c0_n_features": 42,
+    "c4_n_features": 45,
+    "c4_added": [
+      "li",
+      "home_win_expectancy",
+      "away_win_expectancy"
+    ],
+    "train_seasons": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "valid_seasons": [
+      2024
+    ],
+    "sample_weight_by_season": {
+      "2019": 1.0,
+      "2020": 1.2,
+      "2021": 1.4,
+      "2022": 1.6,
+      "2023": 2.0
+    }
+  },
+  "paired": [
+    {
+      "seed": 42,
+      "c0_raw_bss": 739.9697230569768,
+      "c4_raw_bss": 745.7593147676245,
+      "paired_delta_c4_minus_c0": 5.789591710647642
+    },
+    {
+      "seed": 1,
+      "c0_raw_bss": 733.7380864972154,
+      "c4_raw_bss": 726.2477080373642,
+      "paired_delta_c4_minus_c0": -7.490378459851172
+    },
+    {
+      "seed": 7,
+      "c0_raw_bss": 723.3799501778493,
+      "c4_raw_bss": 725.0065435127517,
+      "paired_delta_c4_minus_c0": 1.6265933349023953
+    },
+    {
+      "seed": 123,
+      "c0_raw_bss": 722.8556268099817,
+      "c4_raw_bss": 722.3135174994288,
+      "paired_delta_c4_minus_c0": -0.5421093105528598
+    },
+    {
+      "seed": 2024,
+      "c0_raw_bss": 723.114344147946,
+      "c4_raw_bss": 727.8279707782165,
+      "paired_delta_c4_minus_c0": 4.713626630270483
+    }
+  ],
+  "summary": {
+    "paired_delta_mean": 0.8194647810832976,
+    "paired_delta_std": 5.277913730868355,
+    "c0_mean_raw_bss": 728.6115461379939,
+    "c4_mean_raw_bss": 729.4310109190772
+  },
+  "c0_runs": [
+    {
+      "label": "D_C0_seed_42",
+      "seed": 42,
+      "n_features": 42,
+      "raw_brier_skill_score": 739.9697230569768,
+      "official_brier_skill_score": 739.9697230569768,
+      "brier_score": 0.24795843113268862,
+      "elapsed_seconds": 131.55931019992568,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C0_seed_1",
+      "seed": 1,
+      "n_features": 42,
+      "raw_brier_skill_score": 733.7380864972154,
+      "official_brier_skill_score": 733.7380864972154,
+      "brier_score": 0.2479739981924652,
+      "elapsed_seconds": 139.96276640007272,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C0_seed_7",
+      "seed": 7,
+      "n_features": 42,
+      "raw_brier_skill_score": 723.3799501778493,
+      "official_brier_skill_score": 723.3799501778493,
+      "brier_score": 0.24799987353447392,
+      "elapsed_seconds": 132.6389503001701,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C0_seed_123",
+      "seed": 123,
+      "n_features": 42,
+      "raw_brier_skill_score": 722.8556268099817,
+      "official_brier_skill_score": 722.8556268099817,
+      "brier_score": 0.24800118333056545,
+      "elapsed_seconds": 133.49994309991598,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C0_seed_2024",
+      "seed": 2024,
+      "n_features": 42,
+      "raw_brier_skill_score": 723.114344147946,
+      "official_brier_skill_score": 723.114344147946,
+      "brier_score": 0.2480005370367345,
+      "elapsed_seconds": 137.22481359983794,
+      "n_train": 1221585,
+      "n_valid": 253507
+    }
+  ],
+  "c4_runs": [
+    {
+      "label": "D_C4_seed_42",
+      "seed": 42,
+      "n_features": 45,
+      "raw_brier_skill_score": 745.7593147676245,
+      "official_brier_skill_score": 745.7593147676245,
+      "brier_score": 0.24794396833156448,
+      "elapsed_seconds": 142.75963409990072,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C4_seed_1",
+      "seed": 1,
+      "n_features": 45,
+      "raw_brier_skill_score": 726.2477080373642,
+      "official_brier_skill_score": 726.2477080373642,
+      "brier_score": 0.24799270967669823,
+      "elapsed_seconds": 135.75980419991538,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C4_seed_7",
+      "seed": 7,
+      "n_features": 45,
+      "raw_brier_skill_score": 725.0065435127517,
+      "official_brier_skill_score": 725.0065435127517,
+      "brier_score": 0.24799581019165315,
+      "elapsed_seconds": 133.22780940006487,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C4_seed_123",
+      "seed": 123,
+      "n_features": 45,
+      "raw_brier_skill_score": 722.3135174994288,
+      "official_brier_skill_score": 722.3135174994288,
+      "brier_score": 0.2480025375571738,
+      "elapsed_seconds": 138.11653950018808,
+      "n_train": 1221585,
+      "n_valid": 253507
+    },
+    {
+      "label": "D_C4_seed_2024",
+      "seed": 2024,
+      "n_features": 45,
+      "raw_brier_skill_score": 727.8279707782165,
+      "official_brier_skill_score": 727.8279707782165,
+      "brier_score": 0.2479887620709106,
+      "elapsed_seconds": 137.38980320002884,
+      "n_train": 1221585,
+      "n_valid": 253507
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "task": "E_seed_ensemble",
+  "generated_at": "2026-08-07T17:12:18",
+  "setup": {
+    "features_n": 42,
+    "drop_ids": [
+      "pitcher_id",
+      "batter_id"
+    ],
+    "game_type": "kept",
+    "train_seasons": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "valid_seasons": [
+      2024
+    ],
+    "sample_weight_by_season": {
+      "2019": 1.0,
+      "2020": 1.2,
+      "2021": 1.4,
+      "2022": 1.6,
+      "2023": 2.0
+    },
+    "seeds": [
+      42,
+      1,
+      7,
+      123,
+      2024
+    ],
+    "ensemble_definition": {
+      "n1": "mean of preds from seed [42]",
+      "n3": "mean of preds from seeds [42, 1, 7]",
+      "n5": "mean of preds from seeds [42, 1, 7, 123, 2024]"
+    }
+  },
+  "exp005": {
+    "name": "EXP-005_params",
+    "params": {
+      "iterations": 300,
+      "learning_rate": 0.05,
+      "depth": 6,
+      "loss_function": "Logloss"
+    },
+    "singles": [
+      {
+        "seed": 42,
+        "raw_brier_skill_score": 739.9697230569768,
+        "official_brier_skill_score": 739.9697230569768,
+        "brier_score": 0.24795843113268862,
+        "elapsed_seconds": 131.55931019992568
+      },
+      {
+        "seed": 1,
+        "raw_brier_skill_score": 733.7380864972154,
+        "official_brier_skill_score": 733.7380864972154,
+        "brier_score": 0.2479739981924652,
+        "elapsed_seconds": 139.96276640007272
+      },
+      {
+        "seed": 7,
+        "raw_brier_skill_score": 723.3799501778493,
+        "official_brier_skill_score": 723.3799501778493,
+        "brier_score": 0.24799987353447392,
+        "elapsed_seconds": 132.6389503001701
+      },
+      {
+        "seed": 123,
+        "raw_brier_skill_score": 722.8556268099817,
+        "official_brier_skill_score": 722.8556268099817,
+        "brier_score": 0.24800118333056545,
+        "elapsed_seconds": 133.49994309991598
+      },
+      {
+        "seed": 2024,
+        "raw_brier_skill_score": 723.114344147946,
+        "official_brier_skill_score": 723.114344147946,
+        "brier_score": 0.2480005370367345,
+        "elapsed_seconds": 137.22481359983794
+      }
+    ],
+    "single_mean_raw_bss": 728.6115461379939,
+    "single_std_raw_bss": 7.842337538926378,
+    "ensembles": [
+      {
+        "ensemble": "n1_seed_42",
+        "n_models": 1,
+        "seeds": [
+          42
+        ],
+        "raw_brier_skill_score": 739.9697230569768,
+        "official_brier_skill_score": 739.9697230569768,
+        "brier_score": 0.24795843113268862
+      },
+      {
+        "ensemble": "n3_seeds_42_1_7",
+        "n_models": 3,
+        "seeds": [
+          42,
+          1,
+          7
+        ],
+        "raw_brier_skill_score": 742.0832479885786,
+        "official_brier_skill_score": 742.0832479885786,
+        "brier_score": 0.24795315140101076
+      },
+      {
+        "ensemble": "n5_all_seeds",
+        "n_models": 5,
+        "seeds": [
+          42,
+          1,
+          7,
+          123,
+          2024
+        ],
+        "raw_brier_skill_score": 739.8519029689244,
+        "official_brier_skill_score": 739.8519029689244,
+        "brier_score": 0.24795872545542968
+      }
+    ]
+  },
+  "exp006": {
+    "name": "EXP-006_optuna_best_params",
+    "params": {
+      "depth": 7,
+      "learning_rate": 0.028199996263578355,
+      "l2_leaf_reg": 1.2151617026673374,
+      "iterations": 361,
+      "bagging_temperature": 0.9656320330745594,
+      "loss_function": "Logloss"
+    },
+    "singles": [
+      {
+        "seed": 42,
+        "raw_brier_skill_score": 744.606221517008,
+        "official_brier_skill_score": 744.606221517008,
+        "brier_score": 0.2479468488383765,
+        "elapsed_seconds": 178.839277200168
+      },
+      {
+        "seed": 1,
+        "raw_brier_skill_score": 726.0617413796356,
+        "official_brier_skill_score": 726.0617413796356,
+        "brier_score": 0.24799317423429068,
+        "elapsed_seconds": 178.46196940005757
+      },
+      {
+        "seed": 7,
+        "raw_brier_skill_score": 729.9169659022109,
+        "official_brier_skill_score": 729.9169659022109,
+        "brier_score": 0.24798354361639127,
+        "elapsed_seconds": 179.67485459987074
+      },
+      {
+        "seed": 123,
+        "raw_brier_skill_score": 726.4850694933544,
+        "official_brier_skill_score": 726.4850694933544,
+        "brier_score": 0.24799211673133972,
+        "elapsed_seconds": 179.60179920005612
+      },
+      {
+        "seed": 2024,
+        "raw_brier_skill_score": 728.6145784553332,
+        "official_brier_skill_score": 728.6145784553332,
+        "brier_score": 0.2479867970704468,
+        "elapsed_seconds": 180.32653929991648
+      }
+    ],
+    "single_mean_raw_bss": 731.1369153495084,
+    "single_std_raw_bss": 7.692036943966981,
+    "ensembles": [
+      {
+        "ensemble": "n1_seed_42",
+        "n_models": 1,
+        "seeds": [
+          42
+        ],
+        "raw_brier_skill_score": 744.606221517008,
+        "official_brier_skill_score": 744.606221517008,
+        "brier_score": 0.2479468488383765
+      },
+      {
+        "ensemble": "n3_seeds_42_1_7",
+        "n_models": 3,
+        "seeds": [
+          42,
+          1,
+          7
+        ],
+        "raw_brier_skill_score": 741.405625843039,
+        "official_brier_skill_score": 741.405625843039,
+        "brier_score": 0.24795484414806757
+      },
+      {
+        "ensemble": "n5_all_seeds",
+        "n_models": 5,
+        "seeds": [
+          42,
+          1,
+          7,
+          123,
+          2024
+        ],
+        "raw_brier_skill_score": 739.7374348929509,
+        "official_brier_skill_score": 739.7374348929509,
+        "brier_score": 0.2479590114046124
+      }
+    ]
+  },
+  "pred_paths": {
+    "exp005": "outputs\\predictions\\task_de\\exp005_seed_preds_2024.csv",
+    "exp006": "outputs\\predictions\\task_de\\exp006_seed_preds_2024.csv"
+  }
+}

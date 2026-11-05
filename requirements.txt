@@ -1,0 +1,13 @@
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+PyYAML>=6.0
+joblib>=1.3
+jupyter>=1.0
+matplotlib>=3.7
+seaborn>=0.13
+pytest>=8.0
+
+# Optional tree baselines (the configured missing_dependency policy controls skip/error).
+lightgbm>=4.0
+catboost>=1.2

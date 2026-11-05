@@ -1,0 +1,299 @@
+{
+  "cutoffs": [
+    2022,
+    2023,
+    2024
+  ],
+  "rows_by_cutoff": {
+    "2022": {
+      "tm_seasons": [
+        2019,
+        2020,
+        2021
+      ],
+      "n_tm_rows": 836115,
+      "n_core_rows": 820240
+    },
+    "2023": {
+      "tm_seasons": [
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "n_tm_rows": 1143752,
+      "n_core_rows": 1124912
+    },
+    "2024": {
+      "tm_seasons": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "n_tm_rows": 1458852,
+      "n_core_rows": 1438443
+    }
+  },
+  "integrity": {
+    "profile_rows": 900,
+    "duplicate_key_rows": 0,
+    "inf_cells": 0,
+    "mean_nan_rows": 0
+  },
+  "n_distribution": {
+    "count": 900.0,
+    "mean": 75190.00555555556,
+    "std": 79270.84350759727,
+    "min": 227.0,
+    "10%": 6809.400000000001,
+    "50%": 43961.0,
+    "90%": 201135.0000000001,
+    "max": 396629.0
+  },
+  "sparse_share": 0.027777777777777776,
+  "sparse_n_threshold": 1000,
+  "plots": [
+    "outputs/analysis/trackman_audit_002/count_fastball_IVB_by_cutoff.png",
+    "outputs/analysis/trackman_audit_002/count_fastball_HB_by_cutoff.png",
+    "outputs/analysis/trackman_audit_002/count_breaking_IVB_by_cutoff.png",
+    "outputs/analysis/trackman_audit_002/count_rank_stability_heatmap.png",
+    "outputs/analysis/trackman_audit_002/nonoverlap_breaking_ivb_by_count.png"
+  ],
+  "top_candidates": [
+    {
+      "context_type": "count",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "spin_rate",
+      "effect_ratio_mean": 0.7267085363549791,
+      "effect_ratio_min": 0.37007891609276655,
+      "max_abs_deviation": 258.7961577984713,
+      "min_cell_n": 227,
+      "median_cell_n": 16000.0,
+      "spearman_2022_2023": 0.9636363636363637,
+      "spearman_2023_2024": 0.990909090909091,
+      "spearman_2022_2024": 0.9545454545454546,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "breaking",
+      "physical_variable": "IVB",
+      "effect_ratio_mean": 0.6892268000732514,
+      "effect_ratio_min": 0.6667345406795268,
+      "max_abs_deviation": 9.33549631028488,
+      "min_cell_n": 375,
+      "median_cell_n": 24196.5,
+      "spearman_2022_2023": 1.0,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 1.0,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "rel_speed",
+      "effect_ratio_mean": 0.5527568194406033,
+      "effect_ratio_min": 0.3912043794166069,
+      "max_abs_deviation": 3.192891878682616,
+      "min_cell_n": 227,
+      "median_cell_n": 16000.0,
+      "spearman_2022_2023": 0.4909090909090909,
+      "spearman_2023_2024": 0.9636363636363637,
+      "spearman_2022_2024": 0.3181818181818182,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "breaking",
+      "physical_variable": "rel_speed",
+      "effect_ratio_mean": 0.48943957930923737,
+      "effect_ratio_min": 0.48161327960117223,
+      "max_abs_deviation": 2.2122522388988557,
+      "min_cell_n": 375,
+      "median_cell_n": 24196.5,
+      "spearman_2022_2023": 0.9727272727272729,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 0.9727272727272729,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "breaking",
+      "physical_variable": "spin_rate",
+      "effect_ratio_mean": 0.4527823209141048,
+      "effect_ratio_min": 0.436143323725411,
+      "max_abs_deviation": 62.17411987112564,
+      "min_cell_n": 375,
+      "median_cell_n": 24196.5,
+      "spearman_2022_2023": 0.9818181818181818,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 0.9818181818181818,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "IVB",
+      "effect_ratio_mean": 0.41631092849911516,
+      "effect_ratio_min": 0.38241814385847084,
+      "max_abs_deviation": 5.132801561641557,
+      "min_cell_n": 227,
+      "median_cell_n": 16000.0,
+      "spearman_2022_2023": 0.9545454545454546,
+      "spearman_2023_2024": 0.990909090909091,
+      "spearman_2022_2024": 0.9272727272727275,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "inning_bucket",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "spin_rate",
+      "effect_ratio_mean": 0.3627746781258579,
+      "effect_ratio_min": 0.3327077446297933,
+      "max_abs_deviation": 88.10527079800158,
+      "min_cell_n": 36855,
+      "median_cell_n": 64299.0,
+      "spearman_2022_2023": 1.0,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 1.0,
+      "verdict": "PROMISING"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "fastball",
+      "physical_variable": "rel_speed",
+      "effect_ratio_mean": 0.342197499587867,
+      "effect_ratio_min": 0.3250825251809039,
+      "max_abs_deviation": 1.0835070705041687,
+      "min_cell_n": 10137,
+      "median_cell_n": 40809.0,
+      "spearman_2022_2023": 0.9930069930069931,
+      "spearman_2023_2024": 0.9930069930069931,
+      "spearman_2022_2024": 0.9790209790209792,
+      "verdict": "PROMISING"
+    },
+    {
+      "context_type": "inning_bucket",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "extension",
+      "effect_ratio_mean": 0.29625269833587725,
+      "effect_ratio_min": 0.23492423378203392,
+      "max_abs_deviation": 0.03352109338735043,
+      "min_cell_n": 36855,
+      "median_cell_n": 64299.0,
+      "spearman_2022_2023": 1.0,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 1.0,
+      "verdict": "PROMISING"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "offspeed",
+      "physical_variable": "extension",
+      "effect_ratio_mean": 0.2732578667750099,
+      "effect_ratio_min": 0.2451052846024658,
+      "max_abs_deviation": 0.03396170397960785,
+      "min_cell_n": 227,
+      "median_cell_n": 16000.0,
+      "spearman_2022_2023": 0.6454545454545455,
+      "spearman_2023_2024": 0.881818181818182,
+      "spearman_2022_2024": 0.24545454545454545,
+      "verdict": "SPARSE"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "fastball",
+      "physical_variable": "spin_rate",
+      "effect_ratio_mean": 0.245540061147546,
+      "effect_ratio_min": 0.24175381801669796,
+      "max_abs_deviation": 27.804635089463318,
+      "min_cell_n": 10137,
+      "median_cell_n": 40809.0,
+      "spearman_2022_2023": 1.0,
+      "spearman_2023_2024": 1.0,
+      "spearman_2022_2024": 1.0,
+      "verdict": "PROMISING"
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "breaking",
+      "physical_variable": "HB",
+      "effect_ratio_mean": 0.2138281569936069,
+      "effect_ratio_min": 0.19998854893900397,
+      "max_abs_deviation": 3.0115097435366094,
+      "min_cell_n": 375,
+      "median_cell_n": 24196.5,
+      "spearman_2022_2023": 0.990909090909091,
+      "spearman_2023_2024": 0.990909090909091,
+      "spearman_2022_2024": 0.9727272727272729,
+      "verdict": "SPARSE"
+    }
+  ],
+  "nonoverlap_seasons": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "nonoverlap_integrity": {
+    "rows": 1500,
+    "duplicate_keys": 0,
+    "inf_cells": 0
+  },
+  "nonoverlap_top_candidate_stability": [
+    {
+      "context_type": "count",
+      "pitch_type_group": "breaking",
+      "physical_variable": "IVB",
+      "median_spearman_all": 0.965034965034965,
+      "min_spearman_all": 0.9510489510489512,
+      "n_pairs_all": 10,
+      "median_spearman_ge_sparse": 0.9757575757575757,
+      "min_spearman_ge_sparse": 0.9515151515151514,
+      "n_pairs_ge_sparse": 10,
+      "min_common_cells_ge_sparse": 10,
+      "sign_consistency_rate_ge_sparse": 0.9,
+      "n_cells_sign_checked": 10,
+      "effect_range_min_season": 12.482251037677313,
+      "effect_range_max_season": 14.287220687274313,
+      "min_cell_n_any_season": 102
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "fastball",
+      "physical_variable": "IVB",
+      "median_spearman_all": 0.8776223776223777,
+      "min_spearman_all": 0.7482517482517484,
+      "n_pairs_all": 10,
+      "median_spearman_ge_sparse": 0.8776223776223777,
+      "min_spearman_ge_sparse": 0.7482517482517484,
+      "n_pairs_ge_sparse": 10,
+      "min_common_cells_ge_sparse": 12,
+      "sign_consistency_rate_ge_sparse": 0.75,
+      "n_cells_sign_checked": 12,
+      "effect_range_min_season": 1.4923414940121305,
+      "effect_range_max_season": 2.9776752559007775,
+      "min_cell_n_any_season": 2709
+    },
+    {
+      "context_type": "count",
+      "pitch_type_group": "fastball",
+      "physical_variable": "rel_speed",
+      "median_spearman_all": 0.9685314685314685,
+      "min_spearman_all": 0.9510489510489512,
+      "n_pairs_all": 10,
+      "median_spearman_ge_sparse": 0.9685314685314685,
+      "min_spearman_ge_sparse": 0.9510489510489512,
+      "n_pairs_ge_sparse": 10,
+      "min_common_cells_ge_sparse": 12,
+      "sign_consistency_rate_ge_sparse": 0.9166666666666666,
+      "n_cells_sign_checked": 12,
+      "effect_range_min_season": 1.757974246900858,
+      "effect_range_max_season": 1.964170783919343,
+      "min_cell_n_any_season": 2709
+    }
+  ]
+}

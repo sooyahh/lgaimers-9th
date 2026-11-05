@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-08-07T02:50:53",
+  "params": {
+    "iterations": 300,
+    "learning_rate": 0.05,
+    "depth": 6,
+    "loss_function": "Logloss"
+  },
+  "seed": 42,
+  "G": {
+    "label": "G_season_categorical",
+    "n_features": 44,
+    "categorical_cols": [
+      "top_bottom",
+      "game_type",
+      "base_state",
+      "pitcher_id",
+      "batter_id",
+      "pitcher_hand",
+      "batter_hand",
+      "pitcher_team_id",
+      "batter_team_id",
+      "season"
+    ],
+    "numeric_has_season": false,
+    "categorical_has_season": true,
+    "train_season_levels": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "valid_season_levels": [
+      "2024"
+    ],
+    "unseen_season_levels_in_valid": [
+      "2024"
+    ],
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.25070096554223475,
+    "raw_brier_skill_score": -357.89191158706046,
+    "official_brier_skill_score": 0.0,
+    "prediction_mean": 0.46201256920276895,
+    "prediction_std": 0.045460361918079284,
+    "elapsed_seconds": 1537.6802769000642,
+    "experiment_H": "skipped (clipping has no effect for valid=2024=train_max+1)"
+  },
+  "H": {
+    "status": "skipped",
+    "reason": "skipped (clipping has no effect for valid=2024=train_max+1)"
+  },
+  "baseline_exp003": {
+    "raw_brier_skill_score": 562.2780175846498,
+    "official_brier_skill_score": 562.2780175846498,
+    "brier_score": 0.24840231732123078
+  },
+  "experiment_A": {
+    "raw_brier_skill_score": 578.1844155969828,
+    "official_brier_skill_score": 578.1844155969828,
+    "brier_score": 0.24836258203719846
+  }
+}

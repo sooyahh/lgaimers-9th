@@ -1,0 +1,35 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+catboost_info/
+.pytest_cache/
+
+.venv/
+venv/
+.env
+
+data/raw/*
+data/processed/*
+outputs/models/*
+outputs/predictions/*
+outputs/submissions/*
+
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!outputs/models/.gitkeep
+!outputs/predictions/.gitkeep
+!outputs/submissions/.gitkeep
+!outputs/experiments.csv
+
+# Competition-data slices / large audit bundles (regenerate locally)
+reports/gpt_audit/oof/
+reports/gpt_audit.zip
+
+# Local-only row-level leakage samples (do not track)
+outputs/eda/_leakage_meta.json
+
+# Per-machine tool settings (not team config; .cursor/ is tracked on purpose)
+.claude/
+
+# Smoke-run artifacts (regenerate with --smoke; canonical runs stay tracked)
+outputs/analysis/*_smoke/
