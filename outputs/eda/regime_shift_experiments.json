@@ -1,0 +1,694 @@
+{
+  "generated_at": "2026-08-07T01:08:39",
+  "baseline_exp003_primary_2024": {
+    "brier_score": 0.24840231732123078,
+    "raw_brier_skill_score": 562.2780175846498,
+    "official_brier_skill_score": 562.2780175846498,
+    "valid_target_rate": 0.4861049201797189,
+    "prediction_mean": 0.4979319985208687,
+    "prediction_std": 0.03850581485381219,
+    "prediction_min": 0.34057218350756024,
+    "prediction_max": 0.6404223316357893
+  },
+  "params": {
+    "iterations": 300,
+    "learning_rate": 0.05,
+    "depth": 6,
+    "loss_function": "Logloss"
+  },
+  "seed": 42,
+  "features_used": [
+    "season",
+    "game_month",
+    "game_dayofweek",
+    "inning",
+    "top_bottom",
+    "game_type",
+    "balls_before",
+    "strikes_before",
+    "outs_before",
+    "run_top_before",
+    "run_bot_before",
+    "run_total_before",
+    "score_diff_home",
+    "score_diff_pitcher_team",
+    "runner_on_1b",
+    "runner_on_2b",
+    "runner_on_3b",
+    "num_runners_on",
+    "base_state",
+    "pitcher_id",
+    "batter_id",
+    "pitcher_hand",
+    "batter_hand",
+    "pitcher_team_id",
+    "batter_team_id",
+    "asof_pitcher_n",
+    "asof_pitcher_success_rate",
+    "asof_pitcher_reverse_rate",
+    "asof_pitcher_middle_rate",
+    "asof_pitcher_ball_rate",
+    "asof_pitcher_strike_rate",
+    "asof_pitcher_prev1_game_success_rate",
+    "asof_pitcher_prev3_game_success_rate",
+    "asof_pitcher_prev5_game_success_rate",
+    "asof_pitcher_prev1_game_middle_rate",
+    "asof_pitcher_prev3_game_middle_rate",
+    "asof_pitcher_prev5_game_middle_rate",
+    "asof_batter_n",
+    "asof_batter_success_rate",
+    "asof_batter_middle_rate",
+    "asof_pitcher_pitchmix_n",
+    "asof_pitcher_fastball_rate",
+    "asof_pitcher_breaking_rate",
+    "asof_pitcher_offspeed_rate"
+  ],
+  "season_in_44_features": true,
+  "A": {
+    "label": "A_sample_weight",
+    "train_seasons": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+    ],
+    "valid_seasons": [
+      2024
+    ],
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.24836258203719846,
+    "raw_brier_skill_score": 578.1844155969828,
+    "official_brier_skill_score": 578.1844155969828,
+    "prediction_mean": 0.49621420086976636,
+    "prediction_std": 0.03983608405419257,
+    "sample_weight": {
+      "2019": 1.0,
+      "2020": 1.2,
+      "2021": 1.4,
+      "2022": 1.6,
+      "2023": 2.0,
+      "applied_value_counts": {
+        "1.0": 237413,
+        "1.2": 244087,
+        "1.4": 247088,
+        "1.6": 247472,
+        "2.0": 245525
+      }
+    },
+    "elapsed_seconds": 199.03053830005229
+  },
+  "B": {
+    "label": "B_recent_seasons",
+    "train_seasons": [
+      2022,
+      2023
+    ],
+    "valid_seasons": [
+      2024
+    ],
+    "n_train": 492997,
+    "n_valid": 253507,
+    "train_target_mean": 0.5144960314160126,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.24845589889273276,
+    "raw_brier_skill_score": 540.8288239223125,
+    "official_brier_skill_score": 540.8288239223125,
+    "prediction_mean": 0.49577515296209573,
+    "prediction_std": 0.04136982080752633,
+    "sample_weight": null,
+    "elapsed_seconds": 86.66816630004905
+  },
+  "C": {
+    "label": "C_season_feature_shap",
+    "season_already_in_features": true,
+    "action": "no_retrain_SHAP_only_on_EXP003_primary_model",
+    "metrics_same_as": "EXP-003 primary_2024",
+    "raw_brier_skill_score": 562.2780175846498,
+    "official_brier_skill_score": 562.2780175846498,
+    "brier_score": 0.24840231732123078,
+    "shap": {
+      "method": "CatBoost get_feature_importance(type='ShapValues')",
+      "n_shap_rows": 30000,
+      "n_valid_total": 253507,
+      "season_in_features": true,
+      "season_rank": 1,
+      "season_mean_abs_shap": 0.07893083505121647,
+      "n_features": 44,
+      "top_15": [
+        {
+          "rank": 1,
+          "feature": "season",
+          "mean_abs_shap": 0.07893083505121647
+        },
+        {
+          "rank": 2,
+          "feature": "asof_pitcher_success_rate",
+          "mean_abs_shap": 0.039837036164300614
+        },
+        {
+          "rank": 3,
+          "feature": "game_type",
+          "mean_abs_shap": 0.035094551623900606
+        },
+        {
+          "rank": 4,
+          "feature": "pitcher_id",
+          "mean_abs_shap": 0.026559182832871536
+        },
+        {
+          "rank": 5,
+          "feature": "asof_pitcher_ball_rate",
+          "mean_abs_shap": 0.021079406095612242
+        },
+        {
+          "rank": 6,
+          "feature": "asof_pitcher_reverse_rate",
+          "mean_abs_shap": 0.01660712066834684
+        },
+        {
+          "rank": 7,
+          "feature": "batter_team_id",
+          "mean_abs_shap": 0.016001397716259715
+        },
+        {
+          "rank": 8,
+          "feature": "asof_pitcher_prev1_game_success_rate",
+          "mean_abs_shap": 0.015529283601580332
+        },
+        {
+          "rank": 9,
+          "feature": "batter_id",
+          "mean_abs_shap": 0.015460840477737195
+        },
+        {
+          "rank": 10,
+          "feature": "asof_pitcher_prev3_game_success_rate",
+          "mean_abs_shap": 0.014400494166026389
+        },
+        {
+          "rank": 11,
+          "feature": "asof_batter_success_rate",
+          "mean_abs_shap": 0.013005676638411812
+        },
+        {
+          "rank": 12,
+          "feature": "pitcher_team_id",
+          "mean_abs_shap": 0.01280560779153405
+        },
+        {
+          "rank": 13,
+          "feature": "balls_before",
+          "mean_abs_shap": 0.010822066585324338
+        },
+        {
+          "rank": 14,
+          "feature": "strikes_before",
+          "mean_abs_shap": 0.009298366007282035
+        },
+        {
+          "rank": 15,
+          "feature": "batter_hand",
+          "mean_abs_shap": 0.008147505282748475
+        }
+      ],
+      "full_ranking": [
+        {
+          "rank": 1,
+          "feature": "season",
+          "mean_abs_shap": 0.07893083505121647
+        },
+        {
+          "rank": 2,
+          "feature": "asof_pitcher_success_rate",
+          "mean_abs_shap": 0.039837036164300614
+        },
+        {
+          "rank": 3,
+          "feature": "game_type",
+          "mean_abs_shap": 0.035094551623900606
+        },
+        {
+          "rank": 4,
+          "feature": "pitcher_id",
+          "mean_abs_shap": 0.026559182832871536
+        },
+        {
+          "rank": 5,
+          "feature": "asof_pitcher_ball_rate",
+          "mean_abs_shap": 0.021079406095612242
+        },
+        {
+          "rank": 6,
+          "feature": "asof_pitcher_reverse_rate",
+          "mean_abs_shap": 0.01660712066834684
+        },
+        {
+          "rank": 7,
+          "feature": "batter_team_id",
+          "mean_abs_shap": 0.016001397716259715
+        },
+        {
+          "rank": 8,
+          "feature": "asof_pitcher_prev1_game_success_rate",
+          "mean_abs_shap": 0.015529283601580332
+        },
+        {
+          "rank": 9,
+          "feature": "batter_id",
+          "mean_abs_shap": 0.015460840477737195
+        },
+        {
+          "rank": 10,
+          "feature": "asof_pitcher_prev3_game_success_rate",
+          "mean_abs_shap": 0.014400494166026389
+        },
+        {
+          "rank": 11,
+          "feature": "asof_batter_success_rate",
+          "mean_abs_shap": 0.013005676638411812
+        },
+        {
+          "rank": 12,
+          "feature": "pitcher_team_id",
+          "mean_abs_shap": 0.01280560779153405
+        },
+        {
+          "rank": 13,
+          "feature": "balls_before",
+          "mean_abs_shap": 0.010822066585324338
+        },
+        {
+          "rank": 14,
+          "feature": "strikes_before",
+          "mean_abs_shap": 0.009298366007282035
+        },
+        {
+          "rank": 15,
+          "feature": "batter_hand",
+          "mean_abs_shap": 0.008147505282748475
+        },
+        {
+          "rank": 16,
+          "feature": "pitcher_hand",
+          "mean_abs_shap": 0.008056455750340724
+        },
+        {
+          "rank": 17,
+          "feature": "asof_pitcher_prev5_game_success_rate",
+          "mean_abs_shap": 0.00772738575330277
+        },
+        {
+          "rank": 18,
+          "feature": "asof_pitcher_offspeed_rate",
+          "mean_abs_shap": 0.006001802310622101
+        },
+        {
+          "rank": 19,
+          "feature": "asof_pitcher_strike_rate",
+          "mean_abs_shap": 0.005495458157075878
+        },
+        {
+          "rank": 20,
+          "feature": "asof_pitcher_n",
+          "mean_abs_shap": 0.005438120984976226
+        },
+        {
+          "rank": 21,
+          "feature": "asof_batter_n",
+          "mean_abs_shap": 0.0053468706068769065
+        },
+        {
+          "rank": 22,
+          "feature": "inning",
+          "mean_abs_shap": 0.005004543943990421
+        },
+        {
+          "rank": 23,
+          "feature": "game_month",
+          "mean_abs_shap": 0.004574154276363868
+        },
+        {
+          "rank": 24,
+          "feature": "base_state",
+          "mean_abs_shap": 0.004057931695077773
+        },
+        {
+          "rank": 25,
+          "feature": "asof_pitcher_pitchmix_n",
+          "mean_abs_shap": 0.004038012051563724
+        },
+        {
+          "rank": 26,
+          "feature": "outs_before",
+          "mean_abs_shap": 0.0030685318553394666
+        },
+        {
+          "rank": 27,
+          "feature": "asof_pitcher_fastball_rate",
+          "mean_abs_shap": 0.002934963585062681
+        },
+        {
+          "rank": 28,
+          "feature": "run_total_before",
+          "mean_abs_shap": 0.0028505469371414823
+        },
+        {
+          "rank": 29,
+          "feature": "asof_pitcher_prev3_game_middle_rate",
+          "mean_abs_shap": 0.002646263136873371
+        },
+        {
+          "rank": 30,
+          "feature": "asof_pitcher_middle_rate",
+          "mean_abs_shap": 0.0025197567269405205
+        },
+        {
+          "rank": 31,
+          "feature": "asof_batter_middle_rate",
+          "mean_abs_shap": 0.0025093158126312594
+        },
+        {
+          "rank": 32,
+          "feature": "run_top_before",
+          "mean_abs_shap": 0.001497811449731329
+        },
+        {
+          "rank": 33,
+          "feature": "score_diff_home",
+          "mean_abs_shap": 0.001400900328576073
+        },
+        {
+          "rank": 34,
+          "feature": "score_diff_pitcher_team",
+          "mean_abs_shap": 0.0012221477659298506
+        },
+        {
+          "rank": 35,
+          "feature": "num_runners_on",
+          "mean_abs_shap": 0.0011719727466310676
+        },
+        {
+          "rank": 36,
+          "feature": "asof_pitcher_prev1_game_middle_rate",
+          "mean_abs_shap": 0.0010658001838061992
+        },
+        {
+          "rank": 37,
+          "feature": "asof_pitcher_breaking_rate",
+          "mean_abs_shap": 0.0010656108812153629
+        },
+        {
+          "rank": 38,
+          "feature": "asof_pitcher_prev5_game_middle_rate",
+          "mean_abs_shap": 0.0009771515298106566
+        },
+        {
+          "rank": 39,
+          "feature": "run_bot_before",
+          "mean_abs_shap": 0.0008049718263219513
+        },
+        {
+          "rank": 40,
+          "feature": "game_dayofweek",
+          "mean_abs_shap": 0.0008016818629662355
+        },
+        {
+          "rank": 41,
+          "feature": "top_bottom",
+          "mean_abs_shap": 0.000698346712680434
+        },
+        {
+          "rank": 42,
+          "feature": "runner_on_3b",
+          "mean_abs_shap": 0.00016116763488809775
+        },
+        {
+          "rank": 43,
+          "feature": "runner_on_1b",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "rank": 44,
+          "feature": "runner_on_2b",
+          "mean_abs_shap": 0.0
+        }
+      ]
+    }
+  },
+  "D": {
+    "label": "D_drop_season",
+    "features_used": [
+      "game_month",
+      "game_dayofweek",
+      "inning",
+      "top_bottom",
+      "game_type",
+      "balls_before",
+      "strikes_before",
+      "outs_before",
+      "run_top_before",
+      "run_bot_before",
+      "run_total_before",
+      "score_diff_home",
+      "score_diff_pitcher_team",
+      "runner_on_1b",
+      "runner_on_2b",
+      "runner_on_3b",
+      "num_runners_on",
+      "base_state",
+      "pitcher_id",
+      "batter_id",
+      "pitcher_hand",
+      "batter_hand",
+      "pitcher_team_id",
+      "batter_team_id",
+      "asof_pitcher_n",
+      "asof_pitcher_success_rate",
+      "asof_pitcher_reverse_rate",
+      "asof_pitcher_middle_rate",
+      "asof_pitcher_ball_rate",
+      "asof_pitcher_strike_rate",
+      "asof_pitcher_prev1_game_success_rate",
+      "asof_pitcher_prev3_game_success_rate",
+      "asof_pitcher_prev5_game_success_rate",
+      "asof_pitcher_prev1_game_middle_rate",
+      "asof_pitcher_prev3_game_middle_rate",
+      "asof_pitcher_prev5_game_middle_rate",
+      "asof_batter_n",
+      "asof_batter_success_rate",
+      "asof_batter_middle_rate",
+      "asof_pitcher_pitchmix_n",
+      "asof_pitcher_fastball_rate",
+      "asof_pitcher_breaking_rate",
+      "asof_pitcher_offspeed_rate"
+    ],
+    "n_features": 43,
+    "has_season": false,
+    "has_season_since_start": false,
+    "sample_weight": null,
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.24996087728506666,
+    "raw_brier_skill_score": -61.62780603300444,
+    "official_brier_skill_score": 0.0,
+    "prediction_mean": 0.5058068660392863,
+    "prediction_std": 0.044678451290672716,
+    "elapsed_seconds": 769.8230425000656,
+    "season_since_start_train_range": null,
+    "season_since_start_valid_range": null
+  },
+  "E": {
+    "label": "E_season_since_start",
+    "features_used": [
+      "season_since_start",
+      "game_month",
+      "game_dayofweek",
+      "inning",
+      "top_bottom",
+      "game_type",
+      "balls_before",
+      "strikes_before",
+      "outs_before",
+      "run_top_before",
+      "run_bot_before",
+      "run_total_before",
+      "score_diff_home",
+      "score_diff_pitcher_team",
+      "runner_on_1b",
+      "runner_on_2b",
+      "runner_on_3b",
+      "num_runners_on",
+      "base_state",
+      "pitcher_id",
+      "batter_id",
+      "pitcher_hand",
+      "batter_hand",
+      "pitcher_team_id",
+      "batter_team_id",
+      "asof_pitcher_n",
+      "asof_pitcher_success_rate",
+      "asof_pitcher_reverse_rate",
+      "asof_pitcher_middle_rate",
+      "asof_pitcher_ball_rate",
+      "asof_pitcher_strike_rate",
+      "asof_pitcher_prev1_game_success_rate",
+      "asof_pitcher_prev3_game_success_rate",
+      "asof_pitcher_prev5_game_success_rate",
+      "asof_pitcher_prev1_game_middle_rate",
+      "asof_pitcher_prev3_game_middle_rate",
+      "asof_pitcher_prev5_game_middle_rate",
+      "asof_batter_n",
+      "asof_batter_success_rate",
+      "asof_batter_middle_rate",
+      "asof_pitcher_pitchmix_n",
+      "asof_pitcher_fastball_rate",
+      "asof_pitcher_breaking_rate",
+      "asof_pitcher_offspeed_rate"
+    ],
+    "n_features": 44,
+    "has_season": false,
+    "has_season_since_start": true,
+    "sample_weight": null,
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.24840231732123078,
+    "raw_brier_skill_score": 562.2780175846498,
+    "official_brier_skill_score": 562.2780175846498,
+    "prediction_mean": 0.4979319985208687,
+    "prediction_std": 0.03850581485381219,
+    "elapsed_seconds": 306.4929495998658,
+    "season_since_start_train_range": [
+      0,
+      4
+    ],
+    "season_since_start_valid_range": [
+      5,
+      5
+    ]
+  },
+  "F": {
+    "label": "F_no_season_sample_weight",
+    "features_used": [
+      "game_month",
+      "game_dayofweek",
+      "inning",
+      "top_bottom",
+      "game_type",
+      "balls_before",
+      "strikes_before",
+      "outs_before",
+      "run_top_before",
+      "run_bot_before",
+      "run_total_before",
+      "score_diff_home",
+      "score_diff_pitcher_team",
+      "runner_on_1b",
+      "runner_on_2b",
+      "runner_on_3b",
+      "num_runners_on",
+      "base_state",
+      "pitcher_id",
+      "batter_id",
+      "pitcher_hand",
+      "batter_hand",
+      "pitcher_team_id",
+      "batter_team_id",
+      "asof_pitcher_n",
+      "asof_pitcher_success_rate",
+      "asof_pitcher_reverse_rate",
+      "asof_pitcher_middle_rate",
+      "asof_pitcher_ball_rate",
+      "asof_pitcher_strike_rate",
+      "asof_pitcher_prev1_game_success_rate",
+      "asof_pitcher_prev3_game_success_rate",
+      "asof_pitcher_prev5_game_success_rate",
+      "asof_pitcher_prev1_game_middle_rate",
+      "asof_pitcher_prev3_game_middle_rate",
+      "asof_pitcher_prev5_game_middle_rate",
+      "asof_batter_n",
+      "asof_batter_success_rate",
+      "asof_batter_middle_rate",
+      "asof_pitcher_pitchmix_n",
+      "asof_pitcher_fastball_rate",
+      "asof_pitcher_breaking_rate",
+      "asof_pitcher_offspeed_rate"
+    ],
+    "n_features": 43,
+    "has_season": false,
+    "has_season_since_start": false,
+    "sample_weight": {
+      "2019": 1.0,
+      "2020": 1.2,
+      "2021": 1.4,
+      "2022": 1.6,
+      "2023": 2.0
+    },
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.24951706256392664,
+    "raw_brier_skill_score": 116.03529038389793,
+    "official_brier_skill_score": 116.03529038389793,
+    "prediction_mean": 0.504807369477152,
+    "prediction_std": 0.043518495932752366,
+    "elapsed_seconds": 218.0740912000183,
+    "season_since_start_train_range": null,
+    "season_since_start_valid_range": null
+  },
+  "season_extrapolation_generated_at": "2026-08-07T01:43:37",
+  "G": {
+    "label": "G_season_categorical",
+    "n_features": 44,
+    "categorical_cols": [
+      "top_bottom",
+      "game_type",
+      "base_state",
+      "pitcher_id",
+      "batter_id",
+      "pitcher_hand",
+      "batter_hand",
+      "pitcher_team_id",
+      "batter_team_id",
+      "season"
+    ],
+    "numeric_has_season": false,
+    "categorical_has_season": true,
+    "train_season_levels": [
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "valid_season_levels": [
+      "2024"
+    ],
+    "unseen_season_levels_in_valid": [
+      "2024"
+    ],
+    "n_train": 1221585,
+    "n_valid": 253507,
+    "train_target_mean": 0.5315815109059132,
+    "valid_target_rate": 0.4861049201797189,
+    "brier_score": 0.25070096554223475,
+    "raw_brier_skill_score": -357.89191158706046,
+    "official_brier_skill_score": 0.0,
+    "prediction_mean": 0.46201256920276895,
+    "prediction_std": 0.045460361918079284,
+    "elapsed_seconds": 1537.6802769000642,
+    "experiment_H": "skipped (clipping has no effect for valid=2024=train_max+1)"
+  },
+  "H": {
+    "status": "skipped",
+    "reason": "skipped (clipping has no effect for valid=2024=train_max+1)"
+  }
+}

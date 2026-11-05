@@ -1,0 +1,51 @@
+project:
+  name: synthetic_temporal_smoke_test
+  purpose: end_to_end_test
+  data_version: synthetic_v1
+  notes: "Synthetic data only."
+  next_action: "Do not use this configuration for competition data."
+data:
+  train_path: data/processed/synthetic/train.csv
+  test_path: data/processed/synthetic/test.csv
+  sample_submission_path: data/processed/synthetic/sample_submission.csv
+  target_col: target
+  id_col: row_id
+  submission_key_cols: [row_id]
+  season_col: season
+  time_col: event_time
+  order_cols: [season, event_time, row_id]
+  entity_id_col: pitcher_id
+task:
+  problem_type: binary_classification
+  metric: log_loss
+  metric_callable: null
+  metric_direction: minimize
+cv:
+  strategy: expanding_window
+  min_train_seasons: 2
+  validation_seasons: 1
+  holdout_seasons: 1
+  gap_seasons: 0
+models:
+  enabled: [global_mean, logistic_regression, catboost, lightgbm]
+  missing_dependency: skip
+  params:
+    global_mean: {}
+    logistic_regression: {solver: liblinear, max_iter: 500}
+    catboost: {iterations: 20, verbose: false}
+    lightgbm: {n_estimators: 20, verbosity: -1}
+features:
+  parse_datetime: true
+  add_missing_indicators: true
+diagnostics:
+  calibration_bins: 5
+  min_group_rows: 10
+submission:
+  models: null
+runtime:
+  seed: 42
+output:
+  models_dir: outputs/models
+  predictions_dir: outputs/predictions
+  submissions_dir: outputs/submissions
+  experiments_path: outputs/experiments.csv

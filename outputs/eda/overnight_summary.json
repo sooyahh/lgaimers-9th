@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-08-07T16:06:59",
+  "seed_std": 7.842337538926378,
+  "seed_mean": 728.6115461379939,
+  "A": {
+    "mean_raw_bss": 728.6115461379939,
+    "std_raw_bss": 7.842337538926378,
+    "min_raw_bss": 722.8556268099817,
+    "max_raw_bss": 739.9697230569768,
+    "range_raw_bss": 17.114096246995132
+  },
+  "B": [
+    {
+      "name": "B-1_current",
+      "raw": 739.9697230569768,
+      "delta_vs_B1": 0.0
+    },
+    {
+      "name": "B-2_mild",
+      "raw": 725.4010025995128,
+      "delta_vs_B1": -14.568720457463996
+    },
+    {
+      "name": "B-3_aggressive",
+      "raw": 735.9409091929225,
+      "delta_vs_B1": -4.028813864054314
+    },
+    {
+      "name": "B-4_extreme",
+      "raw": 719.870338593831,
+      "delta_vs_B1": -20.09938446314584
+    }
+  ],
+  "C": [
+    {
+      "name": "C-0_baseline_42",
+      "n_features": 42,
+      "raw": 739.9697230569768,
+      "delta_vs_baseline": 0.0
+    },
+    {
+      "name": "C-1_add_li",
+      "n_features": 43,
+      "raw": 743.8579433174497,
+      "delta_vs_baseline": 3.888220260472849
+    },
+    {
+      "name": "C-2_add_home_win_expectancy",
+      "n_features": 43,
+      "raw": 743.4589721916018,
+      "delta_vs_baseline": 3.48924913462497
+    },
+    {
+      "name": "C-3_add_away_win_expectancy",
+      "n_features": 43,
+      "raw": 743.794356575278,
+      "delta_vs_baseline": 3.824633518301198
+    },
+    {
+      "name": "C-4_add_all_three",
+      "n_features": 45,
+      "raw": 745.7593147676245,
+      "delta_vs_baseline": 5.789591710647642
+    }
+  ]
+}

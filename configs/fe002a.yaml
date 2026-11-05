@@ -1,0 +1,107 @@
+# FE-002A: EXP-004 ablation. Identical to configs/baseline.yaml except one extra exclude.
+# Single changed factor: remove asof_pitcher_prev1_game_success_rate.
+# No shrinkage. Do not overwrite EXP-004 or FE-001A artifacts.
+
+project:
+  name: lg_aimers_phase2_temporal_baselines
+  purpose: fe002a_drop_asof_pitcher_prev1_game_success_rate_vs_exp004
+  data_version: phase2_open_data_raw_copy
+  notes: "FE-002A ablation of asof_pitcher_prev1_game_success_rate. Validation/metric/seed/CatBoost params match baseline.yaml / EXP-004."
+  next_action: "Compare FE-002A expanding-fold raw BSS to EXP-004; no Public LB submit; no shrinkage."
+
+data:
+  train_path: data/raw/train.csv
+  test_path: data/raw/test.csv
+  sample_submission_path: data/raw/sample_submission.csv
+  target_col: control_success
+  id_col: row_id
+  submission_key_cols: [row_id]
+  season_col: season
+  time_col: null
+  order_cols: []
+  entity_id_col: pitcher_id
+
+task:
+  problem_type: binary_classification
+  metric:
+    name: brier_skill_score
+    direction: maximize
+    clip_at_zero: true
+    scale: 100000
+  metric_callable: null
+
+cv:
+  strategy: season_holdout
+  primary:
+    train_seasons: [2019, 2020, 2021, 2022, 2023]
+    valid_seasons: [2024]
+  secondary_folds:
+    - train_seasons: [2019, 2020, 2021]
+      valid_seasons: [2022]
+    - train_seasons: [2019, 2020, 2021, 2022]
+      valid_seasons: [2023]
+    - train_seasons: [2019, 2020, 2021, 2022, 2023]
+      valid_seasons: [2024]
+  min_train_seasons: 2
+  validation_seasons: 1
+  holdout_seasons: 1
+  gap_seasons: 0
+
+models:
+  enabled:
+    - global_mean
+    - logistic_regression
+    - catboost
+    - lightgbm
+  missing_dependency: skip
+  params:
+    global_mean: {}
+    logistic_regression:
+      C: 1.0
+      solver: liblinear
+      max_iter: 1000
+    catboost:
+      iterations: 300
+      learning_rate: 0.05
+      depth: 6
+      loss_function: Logloss
+    lightgbm:
+      n_estimators: 300
+      learning_rate: 0.05
+      num_leaves: 31
+
+features:
+  exclude_cols:
+    - row_id
+    - home_win_expectancy
+    - away_win_expectancy
+    - li
+    - asof_pitcher_prev1_game_success_rate
+  categorical_cols:
+    - top_bottom
+    - game_type
+    - base_state
+    - pitcher_id
+    - batter_id
+    - pitcher_hand
+    - batter_hand
+    - pitcher_team_id
+    - batter_team_id
+  parse_datetime: false
+  add_missing_indicators: true
+
+diagnostics:
+  calibration_bins: 10
+  min_group_rows: 30
+
+submission:
+  models: null
+
+runtime:
+  seed: 42
+
+output:
+  models_dir: outputs/models
+  predictions_dir: outputs/predictions
+  submissions_dir: outputs/submissions
+  experiments_path: outputs/experiments.csv
