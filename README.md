@@ -11,7 +11,7 @@
 
 DACON LG Aimers 9기 Phase 2 — 투구 단위 이진 확률 예측 (`control_success`).
 
-공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline~제출용 실험(EXP-000~006)을 재현한다.
+공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline부터 제출용 실험까지(EXP-000–006)을 재현한다.
 
 이 저장소는 개인 실험 파이프라인을 유지한 채 팀 단위로 실험·리뷰·병합하기 위한 공용 코드베이스다. 협업 규칙의 상세는 `CONTRIBUTING.md`를 따른다.
 
@@ -79,7 +79,7 @@ Score = max(0, 100000 * (1 - Brier / (r * (1 - r))))
 | 위치 | 내용 |
 |---|---|
 | `outputs/experiments.csv` | 실험 레지스트리 (공식 로그) |
-| `docs/GPT_HANDOFF.md` | EXP-000~006 수치·결정 상태 |
+| `docs/GPT_HANDOFF.md` | EXP-000–006 수치·결정 상태 |
 | `reports/gpt_audit/` | 외부 분석용 요약·핸드오프 |
 | `reports/validation_policy.md` | CV lock |
 
@@ -232,7 +232,7 @@ python scripts/verify_gpt_audit_oof_joins.py
 ## 문서 인덱스
 
 - `CONTRIBUTING.md` — 브랜치, 실험, PR 규칙
-- `docs/GPT_HANDOFF.md` — EXP-000~006 수치·결정 상태
+- `docs/GPT_HANDOFF.md` — EXP-000–006 수치·결정 상태
 - `reports/validation_policy.md` — CV lock
 - `reports/feature_safety_audit.md` — feature 안전성
 - `reports/gpt_audit/README.md` — audit 패키지 안내
