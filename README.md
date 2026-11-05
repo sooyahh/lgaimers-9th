@@ -1,238 +1,100 @@
-# LG Aimers Phase 2
+# LG Aimers 9기 Phase 2 — 투구 단위 제구 성공 확률 예측
 
-> **공개용 사본 안내**
-> 이 저장소는 팀 저장소(`LGaimers-9th/lgaimers`, 비공개)의 대회 종료 시점 `main`(2026-08-22, `7d37d2d`)을 포트폴리오용으로 옮긴 것입니다. `main`의 코드·문서·분석 결과는 모두 sooyahh가 작성했으며, 팀원의 실험 브랜치는 넣지 않았습니다.
->
-> - **참가 형태: 개인 참가.** 대회 중 잠시 팀을 결성해 이 저장소를 팀 협업용으로 구성했으나, 팀을 해체하고 개인 참가로 돌아갔습니다. 아래 본문의 '팀 단위 협업' 규칙은 그때 만든 것으로, 이후에도 혼자 같은 규칙(브랜치 → PR → 병합, 실험 레지스트리)을 지키며 작업했습니다.
->
-> - 대회 데이터 재배포 금지에 따라 원본 데이터(`data/raw/`), 행 단위 예측, 모델 파일은 넣지 않았습니다. `outputs/`와 `reports/`의 결과는 모두 집계 통계입니다.
-> - 커밋 이력은 옮기지 않았고, 문서 안의 로컬 절대 경로는 저장소 기준 상대 경로로 바꿨습니다.
-> - 아래 본문은 대회 당시 안내서를 그대로 둔 것입니다. 실행하려면 DACON에서 받은 데이터를 `data/raw/`에 직접 넣어야 합니다.
+[![Unit tests](https://github.com/sooyahh/lgaimers-9th/actions/workflows/tests.yml/badge.svg)](https://github.com/sooyahh/lgaimers-9th/actions/workflows/tests.yml)
 
-DACON LG Aimers 9기 Phase 2 — 투구 단위 이진 확률 예측 (`control_success`).
+**Pitch-level probability forecasting for LG AI Research's LG Aimers 9th hackathon (DACON), done individually.** On 1.47M pitches scored by Brier Skill Score, I locked season-based validation before modeling. I then isolated why the final model improved by submitting a control run that removed only the player-ID features. Removing the IDs added **+269** of the **+471** leaderboard gain. The final score was **877.60**, which passed the completion threshold (549.51) but did not reach the Phase 3 cut.
 
-공식 오픈 데이터·metric·스키마를 기준으로 시즌 holdout / expanding-window 검증과 baseline부터 제출용 실험(EXP-000–006)까지 재현한다.
+---
 
-이 저장소는 개인 실험 파이프라인을 유지한 채 팀 단위로 실험·리뷰·병합하기 위한 공용 코드베이스다. 협업 규칙의 상세는 `CONTRIBUTING.md`를 따른다.
+LG AI연구원 LG Aimers 9기(2026-06-22 ~ 09-02)의 Phase 1 AI 교육과 Phase 2 해커톤을 수료했습니다. 이 저장소는 Phase 2 해커톤의 실험 코드와 집계 결과입니다. **개인 참가**이며, 코드·문서·분석은 모두 sooyahh가 작성했습니다.
 
-## 결과 요약 — Public LB와 원인 분리
+- 과제: 투구 단위 `control_success`(0/1) 확률 예측 (DACON)
+- 데이터: train 1,475,092행 × 49열 (2019~2024 시즌), Trackman 과거 로그 1,793,078행
+- 평가: Brier Skill Score = `max(0, 100000 × (1 − Brier / (r(1−r))))`, 평가 시즌은 비공개 2025
 
-평가 시즌(2025)에는 학습 때 보지 못한 선수가 많다는 가설로, 선수 ID(`pitcher_id`, `batter_id`)를 뺀 모델과 **ID만 다르고 나머지는 같은 통제 제출**(LB-PROBE)을 따로 냈다. 상세: [`reports/lb_anchor_analysis_001.md`](reports/lb_anchor_analysis_001.md)
+## 결과 — Public LB와 원인 분리
+
+평가 시즌(2025)에는 학습 때 보지 못한 선수가 많다는 가설로, 선수 ID(`pitcher_id`, `batter_id`)를 뺀 모델과 **ID만 다르고 나머지는 같은 통제 제출**(LB-PROBE)을 따로 냈습니다. 상세: [`reports/lb_anchor_analysis_001.md`](reports/lb_anchor_analysis_001.md)
 
 | 제출 | 바꾼 것 | 학습 시즌 | 로컬 2024 raw BSS | Public LB |
 |---|---|---|---:|---:|
 | `EXP-004` | 기준 (ID 포함, 44 feature) | 2019–2023 | 578.18 | 406.95 |
 | `LB-PROBE` | 선수 ID만 제거 (42 feature) | 2019–2023 | 739.97 | 676.21 |
-| **`EXP-005`** (최종) | ID 제거 + 2024 시즌 추가 학습 | 2019–2024 | 739.97 | **877.60** |
+| **`EXP-005`** (최종) | ID 제거 + 2024 시즌 추가 학습 | 2019–2024 | — | **877.60** |
 
 - 전체 향상 +470.65 = **선수 ID 제거 +269.26 (57.2%)** + 2024 시즌 추가 +201.39 (42.8%)
-- ID 제거 효과는 로컬 2024 holdout에서 +161.79, Public LB에서 +269.26으로 **1.66배** 커졌다 (이 변화 1건의 전이율이며 일반화하지 않음).
-- 이 대회는 Public LB = Private LB라서, 하이퍼파라미터를 LB 점수로 고르지 않고 해석 규칙을 제출 전에 정했다.
-- 결과는 수료 기준(549.51) 통과 수준이며, Phase 3 진출 컷(상위 100명)에는 미달했다.
+- ID 제거 효과는 로컬 2024 holdout에서 +161.79, Public LB에서 +269.26으로 1.66배 커졌습니다. 로컬 점수만 보면 일반화의 가치를 과소평가하게 됩니다. 이 비율은 변화 1건의 관찰이며 일반화하지 않습니다.
+- 이 대회는 Public LB = Private LB라서, 하이퍼파라미터를 LB 점수로 고르지 않고 결과 해석 규칙을 제출 전에 정했습니다.
+- `EXP-005`는 2024 시즌까지 학습했으므로 로컬 2024 점수를 매기지 않습니다. 같은 피처 구성을 2019–2023으로 학습한 점수가 `LB-PROBE`의 739.97입니다.
 
-## Competition / Problem
+## 내가 한 일
 
-| 항목 | 값 |
-|---|---|
-| Target | `control_success` (0/1) |
-| 제출 키 | `row_id` |
-| Metric | Brier Skill Score (공식: `max(0, 100000 * (1 - Brier / (r(1-r))))`) |
-| 데이터 | `data/raw/train.csv`, `test.csv`, `sample_submission.csv` (`phase2_open_data_raw_copy`) |
-| Config | `configs/baseline.yaml` |
+1. **검증 체계를 먼저 고정했습니다.** 시즌 단위 검증(2019–2023 학습 → 2024 검증)과 expanding-window 보조 검증 3개를 [`reports/validation_policy.md`](reports/validation_policy.md)로 고정했고, 시즌 내부 무작위 분할은 쓰지 않았습니다.
+2. **피처 안전성을 감사했습니다.** 공식 데이터 설명서만 근거로 48개 입력 열을 안전 44 · 누수 검토 필요 3 · 제외 1로 분류했고, 근거가 불분명한 3개(승리 기대값 2개, 상황 중요도)는 기본 제외했습니다 ([`reports/feature_safety_audit.md`](reports/feature_safety_audit.md)).
+3. **기준선부터 단계적으로 실험했습니다.** 같은 검증·seed(42)로 아래 실험을 비교했습니다.
+4. **원인을 분리했습니다.** 한 번에 한 변수만 바꾸는 통제 제출(LB-PROBE)로 점수 향상을 두 요인으로 나눴습니다.
+5. **모든 실험을 기록했습니다.** 브랜치 → PR → 병합 흐름과 실험 레지스트리([`outputs/experiments.csv`](outputs/experiments.csv))로 실험을 ID 하나로 추적했습니다. 혼자 작업한 뒤에도 같은 규칙([`CONTRIBUTING.md`](CONTRIBUTING.md))을 지켰습니다.
 
-모델 비교·진단에는 official clip 전 **raw BSS** / Brier를 주로 쓴다. 구현: `src/metrics.py`, `src/evaluate.py`.
+### 실험 기록 (로컬 2024 검증, raw BSS)
 
-## Repository 목적
+| ID | 내용 | raw BSS |
+| --- | --- | ---: |
+| EXP-000 | 학습 데이터 평균 기준선 | −827.9 |
+| EXP-001A | 로지스틱 회귀 + 안전 피처 44개 | −464.6 |
+| EXP-002 | LightGBM | 8.2 |
+| EXP-003 | CatBoost | 562.3 |
+| EXP-004 | CatBoost + 시즌 가중치 | 578.2 |
+| EXP-005 | 선수 ID 제거(42개 피처) | 740.0 |
+| EXP-006 | Optuna 튜닝 CatBoost (로컬 최고) | 744.7 |
 
-- 공통 validation / metric / seed를 고정한 상태로 실험을 재현한다.
-- 실험은 별도 branch에서 수행하고, `main`에는 검증된 공용 코드만 Pull Request로 합친다.
-- 실험 로그(`outputs/experiments.csv`)로 팀 전체 `experiment_id`를 한 namespace로 관리한다.
-- 대회 raw data와 대형 모델 artifact는 Git에 올리지 않는다.
+이후 Trackman 물리량 기반 피처(TM 계열)와 직전 투구 피처(FE 계열)를 추가하는 실험을 같은 검증으로 진행했고, 제출하지는 않았습니다. 상세: [`docs/STATUS.md`](docs/STATUS.md), [`reports/next_experiment_decision.md`](reports/next_experiment_decision.md)
 
-## Validation (잠정 확정)
+## 한계
 
-`reports/validation_policy.md`, VAL-AUDIT-001 이후:
+- 결과는 수료 기준 통과 수준이며, Phase 3 진출 컷(상위 100명, 약 1,102점)과는 약 225점 차이가 났습니다.
+- 1위도 상수 예측 대비 Brier를 1.2%만 개선한, 신호가 매우 약한 과제였습니다.
+- 상위권과의 차이를 만든 요인(Trackman 물리량 활용 등)은 대회 기간 안에 검증하지 못했습니다.
+- 시즌 내부 시간순 정렬 정보가 없어 경기 단위 누수가 없다고는 주장하지 않습니다.
 
-- **Primary:** train `2019–2023` → valid `2024`
-- **Secondary:** expanding  
-  `2019–2021→2022` / `2019–2022→2023` / `2019–2023→2024`
-
-시즌 내부 시간순(`order_cols`)은 아직 비어 있고, game-level leakage-free split은 주장하지 않는다.
-
-공통 seed는 `configs/baseline.yaml`의 `runtime.seed` (**42**)다.
-
-## Metric
-
-공식 점수:
-
-```
-Brier Score = mean((p_i - y_i)^2)
-r = mean(y)
-Score = max(0, 100000 * (1 - Brier / (r * (1 - r))))
-```
-
-- Config: `configs/baseline.yaml` → `task.metric.name: brier_skill_score`, `clip_at_zero: true`, `scale: 100000`
-- Official BSS는 음수 raw를 0으로 clip하므로, 모델 비교는 raw BSS / Brier를 우선한다.
-
-## 실험 상태 확인 위치
-
-| 위치 | 내용 |
-|---|---|
-| `outputs/experiments.csv` | 실험 레지스트리 (공식 로그) |
-| `docs/GPT_HANDOFF.md` | EXP-000–006 수치·결정 상태 |
-| `reports/gpt_audit/` | 외부 분석용 요약·핸드오프 |
-| `reports/validation_policy.md` | CV lock |
-
-현재 기록된 실험 요약 (출처: 위 레지스트리·핸드오프. Public LB는 `experiments.csv`에 없음. 정식 adopt/reject는 보류 `results_only`):
-
-| ID | 요약 | Primary 2024 raw BSS (대략) |
-|---|---|---:|
-| EXP-000 | train target mean 기준선 | −827.9 |
-| EXP-001A | logistic + provisionally safe 44 feat | −464.6 |
-| EXP-002 | LightGBM native cats | 8.2 |
-| EXP-003 | CatBoost native cats | 562.3 |
-| EXP-004 | CatBoost + season sample weight | 578.2 |
-| EXP-005 | L features, full-train 제출 후보 | 740.0 (S1) |
-| EXP-006 | Optuna tuned CatBoost (local 최고) | **744.7** |
-
-다음 공식 실험 ID는 `EXP-007`부터 사용한다. 예약·명명 규칙은 `CONTRIBUTING.md`.
-
-## Feature 정책
-
-기본 exclude (`configs/baseline.yaml`):
-
-- `row_id`
-- `home_win_expectancy`, `away_win_expectancy`, `li` (구성 확인 전 제외)
-
-EXP-005/006는 추가로 `pitcher_id`, `batter_id`를 제거한 L feature set(42열, `game_type` 유지)을 사용한다. 상세: `reports/feature_safety_audit.md`.
-
-## Repository 구조
+## 저장소 구조
 
 ```text
-configs/          baseline.yaml, synthetic.yaml
-data/raw/         대회 CSV (로컬만; .gitkeep만 추적)
-data/processed/   합성 smoke 데이터 등 (gitignore)
-docs/             GPT_HANDOFF 등
-notebooks/        EDA 노트북
-outputs/experiments.csv   실험 레지스트리 (추적)
-outputs/eda/      요약 md/json (추적)
-outputs/models/   학습 모델 (gitignore)
-outputs/predictions/  OOF·holdout 예측 (gitignore)
-outputs/submissions/  제출 CSV·zip (gitignore)
-reports/          validation / feature / gpt_audit
-scripts/          EXP·VAL·EDA 러너
-src/              공통 파이프라인 (train, predict, metrics, evaluate, ...)
-tests/            unittest (대회 CSV 불필요)
+configs/      baseline.yaml(검증·metric·seed 고정), synthetic.yaml
+src/          공통 파이프라인 (train, predict, metrics, evaluate, ...)
+scripts/      실험·검증·EDA 러너 (EXP-000~006, FE/TM, LB-PROBE)
+tests/        unittest (대회 데이터 없이 합성 데이터로 실행)
+reports/      검증 정책, 피처 안전성, 리더보드·오류 분석
+outputs/      실험 레지스트리(experiments.csv), EDA·분석 집계표
+docs/         진행 상태(STATUS), 실험 핸드오프, 피처 심층 분석
 ```
 
-## 설치
-
-저장소 루트에서:
-
-```powershell
-pip install -r requirements.txt
-```
-
-CatBoost / LightGBM은 optional이지만 tree 실험에 필요하다. Optuna는 EXP-006 스크립트에서 import한다 (`requirements.txt`에는 아직 없다).
-
-## 데이터 배치
-
-대회 원본 CSV를 로컬에만 둔다 (`.gitignore`: `data/raw/*`). Git에는 `data/raw/.gitkeep`만 있다.
-
-```text
-data/raw/train.csv
-data/raw/test.csv
-data/raw/sample_submission.csv
-```
-
-경로·컬럼은 `configs/baseline.yaml`의 `data.*`와 맞춘다.
-
-## 테스트
-
-대회 데이터 없이 합성 데이터로 동작한다. clone 후 아래를 먼저 실행한다.
-
-```powershell
-python -m unittest discover -s tests -v
-```
-
-`python scripts/generate_synthetic_data.py`는 `data/processed/synthetic/`에 smoke CSV를 만든다.
-`python -m src.train --config configs/synthetic.yaml`은 공유 `outputs/experiments.csv`에 smoke 행을 추가하므로, 온보딩 확인은 unittest를 사용한다.
+`reports/gpt_audit/`와 `docs/GPT_HANDOFF.md`는 외부 AI 검토용으로 실험 요약을 묶은 패키지입니다. 전략 검토, 문서화, 코드 작성을 서로 다른 AI 도구에 나눠 맡기고, 결과는 산출물과 실험 기록으로만 판단했습니다.
 
 ## 실행
 
-모든 명령은 **저장소 루트**에서 실행한다. `src`를 import하는 실험 스크립트는 `python scripts/...py`가 아니라 `python -m scripts.<module>`을 사용한다. (`python scripts/run_exp000_target_mean.py`는 `ModuleNotFoundError: No module named 'src'`가 난다.)
+모든 명령은 저장소 루트에서 실행합니다.
 
-공통 파이프라인 (대회 CSV 필요):
-
-```powershell
-python -m src.train --config configs/baseline.yaml
-python -m src.predict --config configs/baseline.yaml --experiment-id EXPERIMENT_ID
+```bash
+pip install -r requirements.txt
+python -m unittest discover -s tests -v
 ```
 
-`python -m src.train`은 `temporal_YYYYMMDD_...` ID를 만들고, 공식 EXP ID(`EXP-007` 등)가 아니다. 팀 실험은 `scripts/` 러너처럼 ID를 명시한다.
+테스트는 대회 데이터 없이 합성 데이터로 동작합니다. 실험을 재현하려면 DACON에서 받은 `train.csv`, `test.csv`, `sample_submission.csv`를 `data/raw/`에 넣고 실험 러너를 모듈로 실행합니다.
 
-실험별 스크립트 예 (대회 CSV 필요; EXP-005/006는 `--help` 없이 바로 학습을 시작한다):
-
-```powershell
-python -m scripts.run_exp000_target_mean
-python -m scripts.run_exp001a_logistic
-python -m scripts.run_exp002_lightgbm
-python -m scripts.run_exp003_catboost
+```bash
 python -m scripts.run_exp004_catboost_weighted
 python -m scripts.run_full_train_exp005
 python -m scripts.run_exp006_tuning_ensemble
 ```
 
-합성 데이터 생성:
+`src`를 import하므로 `python scripts/....py`가 아니라 `python -m scripts.<module>` 형식을 써야 합니다. 경로·컬럼은 `configs/baseline.yaml`을 따릅니다.
 
-```powershell
-python scripts/generate_synthetic_data.py
-```
+## 공개용 사본 안내
 
-enriched OOF는 로컬에서만 생성한다 (`reports/gpt_audit/oof/`는 gitignore):
+- 이 저장소는 대회 종료 시점(2026-08-22)의 작업 저장소 `main`을 포트폴리오용으로 옮긴 것입니다. 대회 중 잠시 팀을 결성해 협업용으로 구성했다가 개인 참가로 돌아갔으며, 팀원의 실험 브랜치는 넣지 않았습니다.
+- 대회 데이터 재배포 금지에 따라 원본 데이터, 행 단위 예측, 모델 파일은 넣지 않았습니다. `outputs/`와 `reports/`의 결과는 모두 집계 통계입니다.
+- `outputs/experiments.csv`의 `temporal_…` 행은 파이프라인 점검용 실행 기록입니다. 레지스트리는 추가만 하는 규칙이라 지우지 않았습니다.
 
-```powershell
-python scripts/build_gpt_audit_oof.py
-python scripts/verify_gpt_audit_oof_joins.py
-```
+## License
 
-## Experiment log / submission
-
-| 경로 | 내용 | git |
-|---|---|---|
-| `outputs/experiments.csv` | 실험 레지스트리 (`author`, `git_branch`, `git_commit`, `git_dirty` 포함) | 추적 |
-| `outputs/eda/` | EDA·진단 요약 | 추적 (`_leakage_meta.json` 등 row-level sample은 제외) |
-| `outputs/models/` | 학습된 모델 | 무시 |
-| `outputs/predictions/` | OOF / holdout 예측 | 무시 |
-| `outputs/submissions/` | 제출 CSV·zip | 무시 |
-| `reports/` | validation / feature / season audit | 추적 |
-| `reports/gpt_audit/` | 외부 분석용 요약 | 추적 (OOF CSV·zip 제외) |
-| `docs/GPT_HANDOFF.md` | EXP 핸드오프 | 추적 |
-
-제출 zip은 로컬 `outputs/submissions/`에 생성되며 git에는 올리지 않는다.
-
-## 협업 작업 흐름
-
-팀 운영 규칙이다. 현재 GitHub 저장소 설정만으로는 `main` 직접 push가 기술적으로 막히지 않는다.
-
-1. `main` 최신화
-2. 작업 목적 확인 (`outputs/experiments.csv`, Issue, `docs/GPT_HANDOFF.md`)
-3. 별도 branch 생성 (`exp/`, `feat/`, `fix/`, `docs/`, `chore/`)
-4. 하나의 핵심 가설/작업 수행
-5. test 및 필요한 실행
-6. experiment log 기록 (`outputs/experiments.csv`)
-7. commit
-8. push
-9. Pull Request
-10. review
-11. merge
-
-`main`에서 직접 작업하거나 `main`에 직접 push하지 않는다. 상세 규칙·PR 체크리스트는 `CONTRIBUTING.md`와 `.github/pull_request_template.md`.
-
-## 문서 인덱스
-
-- `CONTRIBUTING.md` — 브랜치, 실험, PR 규칙
-- `docs/GPT_HANDOFF.md` — EXP-000–006 수치·결정 상태
-- `reports/validation_policy.md` — CV lock
-- `reports/feature_safety_audit.md` — feature 안전성
-- `reports/gpt_audit/README.md` — audit 패키지 안내
+코드는 [MIT](LICENSE)입니다. 대회 데이터에는 적용되지 않습니다.

@@ -7,6 +7,7 @@ jupyter>=1.0
 matplotlib>=3.7
 seaborn>=0.13
 pytest>=8.0
+optuna>=3.0
 
 # Optional tree baselines (the configured missing_dependency policy controls skip/error).
 lightgbm>=4.0
