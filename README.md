@@ -75,6 +75,9 @@ LG AI연구원 LG Aimers 9기(2026-06-22 ~ 09-02)의 Phase 1 AI 교육과 Phase 
 
 ## 저장소 구조
 
+<details>
+<summary>펼쳐 보기</summary>
+
 ```text
 configs/      baseline.yaml(검증·metric·seed 고정), synthetic.yaml
 src/          공통 파이프라인 (train, predict, metrics, evaluate, ...)
@@ -87,7 +90,12 @@ docs/         진행 상태(STATUS), 실험 핸드오프, 피처 심층 분석
 
 `reports/gpt_audit/`와 `docs/GPT_HANDOFF.md`는 외부 AI 검토용으로 실험 요약을 묶은 패키지이고, [`docs/process/CLAUDE.md`](docs/process/CLAUDE.md)는 코딩 AI에게 준 작업 지침(검증 고정·누수 규칙·실험 기록 규칙)입니다. 전략 검토, 문서화, 코드 작성을 서로 다른 AI 도구에 나눠 맡기고, 결과는 산출물과 실험 기록으로만 판단했습니다.
 
+</details>
+
 ## 실행
+
+<details>
+<summary>펼쳐 보기</summary>
 
 모든 명령은 저장소 루트에서 실행합니다.
 
@@ -106,11 +114,18 @@ python -m scripts.run_exp006_tuning_ensemble
 
 `src`를 import하므로 `python scripts/....py`가 아니라 `python -m scripts.<module>` 형식을 써야 합니다. 경로·컬럼은 `configs/baseline.yaml`을 따릅니다.
 
+</details>
+
 ## 공개용 사본 안내
+
+<details>
+<summary>펼쳐 보기</summary>
 
 - 이 저장소는 대회 종료 시점(2026-08-22)의 작업 저장소 `main`을 포트폴리오용으로 옮긴 것입니다. 대회 중 잠시 팀을 결성해 협업용으로 구성했다가 개인 참가로 돌아갔으며, 팀원의 실험 브랜치는 넣지 않았습니다.
 - 대회 데이터 재배포 금지에 따라 원본 데이터, 행 단위 예측, 모델 파일은 넣지 않았습니다. `outputs/`와 `reports/`의 결과는 모두 집계 통계입니다.
 - `outputs/experiments.csv`의 `temporal_…` 행은 파이프라인 점검용 실행 기록입니다. 레지스트리는 추가만 하는 규칙이라 지우지 않았습니다.
+
+</details>
 
 ## License
 
