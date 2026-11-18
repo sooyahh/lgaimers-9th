@@ -68,7 +68,7 @@ outputs/      실험 레지스트리(experiments.csv), EDA·분석 집계표
 docs/         진행 상태(STATUS), 실험 핸드오프, 피처 심층 분석
 ```
 
-`reports/gpt_audit/`와 `docs/GPT_HANDOFF.md`는 외부 AI 검토용으로 실험 요약을 묶은 패키지입니다. 전략 검토, 문서화, 코드 작성을 서로 다른 AI 도구에 나눠 맡기고, 결과는 산출물과 실험 기록으로만 판단했습니다.
+`reports/gpt_audit/`와 `docs/GPT_HANDOFF.md`는 외부 AI 검토용으로 실험 요약을 묶은 패키지이고, [`docs/process/CLAUDE.md`](docs/process/CLAUDE.md)는 코딩 AI에게 준 작업 지침(검증 고정·누수 규칙·실험 기록 규칙)입니다. 전략 검토, 문서화, 코드 작성을 서로 다른 AI 도구에 나눠 맡기고, 결과는 산출물과 실험 기록으로만 판단했습니다.
 
 ## 실행
 
